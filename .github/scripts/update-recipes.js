@@ -298,7 +298,7 @@ async function main() {
   console.log(`Feed has ${feed.length} videos; newest card on the site is ${newest}.`);
 
   const todo = feed
-    .filter(v => v.id && v.date > newest && !seen.includes(v.id) && !html.includes(`id="v-${v.id}"`))
+    .filter(v => v.id && v.date >= newest && !seen.includes(v.id) && !html.includes(`id="v-${v.id}"`))
     .sort((a, b) => a.published.localeCompare(b.published));
   if (!todo.length) { console.log('No new videos.'); return; }
 
