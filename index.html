@@ -56,6 +56,8 @@ h1{font:400 clamp(34px,5vw,52px)/1.05 var(--display);margin:0 0 14px;text-wrap:b
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:currentColor}
 .dot.t-mead{background:var(--mead)}.dot.t-wine{background:var(--wine)}.dot.t-cider{background:var(--cider)}.dot.t-beer{background:var(--beer)}.dot.t-other{background:var(--other)}
 .sort{border-radius:8px}
+.sortwrap{display:inline-flex;align-items:center;gap:8px;font:600 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+select.sort{appearance:none;-webkit-appearance:none;padding-right:30px;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 15px) 52%,calc(100% - 10px) 52%;background-size:5px 5px;background-repeat:no-repeat;letter-spacing:0;text-transform:none}
 .status{flex-basis:100%;margin:0;font-size:13px;color:var(--muted)}
 .drink{padding-top:34px;scroll-margin-top:120px}
 .shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:16px}
@@ -100,7 +102,7 @@ h4{font:600 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;col
     <div>
       <p class="eyebrow">A fan-made index of City Steading Brews recipes</p>
       <h1>CSB Recipe Box</h1>
-      <p class="lede">Every recipe video on the City Steading Brews YouTube channel as a card: ingredients, gravity readings where they were given, and a link to the video for the full process. The cards are grouped by drink type and sorted by upload date.</p>
+      <p class="lede">Every recipe video on the City Steading Brews YouTube channel as a card: ingredients, gravity readings where they were given, and a link to the video for the full process. Browse them all together or pick a drink type, and sort by newest or oldest upload.</p>
       <div class="nums">
         <div><b>298</b>recipe videos</div>
         <div><b>267</b>with ingredient lists</div>
@@ -117,7 +119,7 @@ h4{font:600 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;col
   <div class="bar" role="search">
     <div class="search"><label for="q" class="eyebrow" style="position:absolute;left:-9999px">Search recipes</label><input id="q" type="search" placeholder="Search by name or ingredient: cherry, 71B, maple…" autocomplete="off"></div>
     <div class="chips" id="chips"><button type="button" class="chip" data-f="all" aria-pressed="true">All<span class="n">298</span></button><button type="button" class="chip" data-f="mead" aria-pressed="false"><i class="dot t-mead"></i>Mead<span class="n">159</span></button><button type="button" class="chip" data-f="wine" aria-pressed="false"><i class="dot t-wine"></i>Wine<span class="n">77</span></button><button type="button" class="chip" data-f="cider" aria-pressed="false"><i class="dot t-cider"></i>Cider<span class="n">28</span></button><button type="button" class="chip" data-f="beer" aria-pressed="false"><i class="dot t-beer"></i>Beer<span class="n">21</span></button><button type="button" class="chip" data-f="other" aria-pressed="false"><i class="dot t-other"></i>Other & Hybrids<span class="n">13</span></button></div>
-    <button type="button" class="sort" id="sort" aria-label="Change sort order">Newest first</button>
+    <label class="sortwrap"><span>Sort</span><select class="sort" id="sort" aria-label="Sort recipes by upload date"><option value="new">Newest first</option><option value="old">Oldest first</option></select></label>
     <p class="status" id="status" aria-live="polite"></p>
   </div>
 
@@ -1326,33 +1328,53 @@ h4{font:600 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;col
 
 <script>
 (function(){
-  var q=document.getElementById('q'), chips=[].slice.call(document.querySelectorAll('.chip')), sortBtn=document.getElementById('sort'),
+  var q=document.getElementById('q'), chips=[].slice.call(document.querySelectorAll('.chip')), sortSel=document.getElementById('sort'),
       secs=[].slice.call(document.querySelectorAll('.drink')), status=document.getElementById('status'), empty=document.getElementById('empty');
   var filter='all', newest=true;
   try{var s=localStorage.getItem('csb-sort'); if(s==='old'){newest=false;}}catch(e){}
-  function sortCards(){
-    secs.forEach(function(sec){var g=sec.querySelector('.grid'); var cs=[].slice.call(g.children);
-      cs.sort(function(a,b){return newest? b.dataset.date.localeCompare(a.dataset.date) : a.dataset.date.localeCompare(b.dataset.date);});
-      cs.forEach(function(c){g.appendChild(c);});});
-    sortBtn.textContent=newest?'Newest first':'Oldest first';
+  sortSel.value=newest?'new':'old';
+
+  // Remember each card's home drawer, then build one combined "All recipes" drawer (made here, not in the HTML,
+  // so the weekly updater script still only sees the five drink-type sections).
+  var cards=[];
+  secs.forEach(function(sec){[].slice.call(sec.querySelectorAll('.card')).forEach(function(c){c._home=sec.querySelector('.grid'); cards.push(c);});});
+  var lo=cards.reduce(function(m,c){return c.dataset.date<m?c.dataset.date:m;},'9999').slice(0,4),
+      hi=cards.reduce(function(m,c){return c.dataset.date>m?c.dataset.date:m;},'0000').slice(0,4);
+  var allSec=document.createElement('section'); allSec.className='drink'; allSec.id='all-recipes';
+  allSec.innerHTML='<div class="shead"><h2>All recipes</h2><p>Every drink type together, in upload order</p><span class="count"><b class="shown">'+cards.length+'</b> recipes · '+lo+'–'+hi+'</span></div><div class="grid"></div>';
+  secs[0].parentNode.insertBefore(allSec,secs[0]);
+  var allGrid=allSec.querySelector('.grid');
+
+  function byDate(a,b){return newest? b.dataset.date.localeCompare(a.dataset.date) : a.dataset.date.localeCompare(b.dataset.date);}
+  function place(){
+    // All: every card in the one combined grid. A drink type: cards back in their own drawers.
+    var sorted=cards.slice().sort(byDate);
+    sorted.forEach(function(c){(filter==='all'?allGrid:c._home).appendChild(c);});
   }
   function apply(){
     var term=q.value.trim().toLowerCase(), words=term?term.split(/\s+/):[], total=0;
-    secs.forEach(function(sec){
-      var on=(filter==='all'||filter===sec.dataset.k), n=0;
+    function count(sec,on){var n=0;
       [].slice.call(sec.querySelectorAll('.card')).forEach(function(c){
         var ok=on&&words.every(function(w){return c.dataset.s.indexOf(w)>-1;}); c.hidden=!ok; if(ok)n++;});
-      sec.hidden=(n===0); sec.querySelector('.shown').textContent=n; total+=n;});
+      sec.hidden=(n===0); sec.querySelector('.shown').textContent=n; return n;}
+    if(filter==='all'){secs.forEach(function(sec){sec.hidden=true;}); total=count(allSec,true);}
+    else{allSec.hidden=true; secs.forEach(function(sec){total+=count(sec,filter===sec.dataset.k);});}
     empty.hidden=total>0;
     status.textContent=(term||filter!=='all')?('Showing '+total+' of 298 recipes'+(term?' matching "'+q.value.trim()+'"':'')+'.'):'';
   }
-  chips.forEach(function(ch){ch.addEventListener('click',function(){filter=ch.dataset.f;
-    chips.forEach(function(c){c.setAttribute('aria-pressed',String(c===ch));}); apply();
-    if(filter!=='all'){var t=document.getElementById(filter); if(t)t.scrollIntoView();}});});
+  function setFilter(f,scroll){filter=f;
+    chips.forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===f));});
+    place(); apply();
+    if(scroll){var t=document.getElementById(f==='all'?'all-recipes':f); if(t)t.scrollIntoView();}}
+
+  chips.forEach(function(ch){ch.addEventListener('click',function(){setFilter(ch.dataset.f,true);});});
   q.addEventListener('input',apply);
-  sortBtn.addEventListener('click',function(){newest=!newest; try{localStorage.setItem('csb-sort',newest?'new':'old');}catch(e){} sortCards();});
-  if(!newest)sortCards();
-  if(location.hash){var t=document.getElementById(location.hash.slice(1)); if(t)t.scrollIntoView();}
+  sortSel.addEventListener('change',function(){newest=sortSel.value!=='old'; try{localStorage.setItem('csb-sort',newest?'new':'old');}catch(e){} place();});
+
+  var hash=location.hash.slice(1), startF='all';
+  secs.forEach(function(sec){if(sec.dataset.k===hash)startF=hash;});
+  setFilter(startF,false);
+  if(hash){var t=document.getElementById(hash); if(t)t.scrollIntoView();}
 })();
 </script>
 </body></html>
