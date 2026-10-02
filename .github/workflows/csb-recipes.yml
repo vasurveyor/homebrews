@@ -45,7 +45,11 @@ jobs:
             echo "Nothing to commit."
             echo "pushed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Add new CSB recipe card(s): $TITLES"
+            if [ -n "$TITLES" ]; then
+              git commit -m "Add new CSB recipe card(s): $TITLES"
+            else
+              git commit -m "Record new CSB videos with no recipe"
+            fi
             git push
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           fi
