@@ -1,0 +1,47 @@
+name: Remove a recipe card
+
+on:
+  workflow_dispatch:
+    inputs:
+      card:
+        description: "YouTube link, video ID, or words from the card's title"
+        required: true
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: csb-recipes
+  cancel-in-progress: false
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Remove the card
+        id: run
+        env:
+          CARD: ${{ inputs.card }}
+        run: node .github/scripts/remove-card.js "$CARD"
+
+      - name: Commit changes
+        env:
+          TITLE: ${{ steps.run.outputs.title }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/csb-seen.json
+          git commit -m "Remove recipe card: $TITLE"
+          git push
+
+      - name: Rebuild GitHub Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds" || echo "Pages will rebuild on its own."
