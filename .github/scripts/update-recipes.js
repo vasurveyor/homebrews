@@ -150,6 +150,12 @@ function parseRecipe(title, desc) {
   };
 }
 
+// A video's chapter list ("2:47 Why We Still Sanitize Everything") is not a recipe.
+function looksLikeChapters(items) {
+  const real = items.filter(x => !x.sub);
+  return real.filter(x => /^\(?\d{1,2}:\d{2}/.test(x.text)).length >= real.length / 2;
+}
+
 // ------------------------------------------------------------- Claude API --
 
 async function parseWithClaude(title, desc) {
@@ -307,6 +313,7 @@ async function main() {
     let r = await parseWithClaude(v.title, v.desc);
     const via = r === undefined ? 'rules' : 'Claude';
     if (r === undefined) r = parseRecipe(v.title, v.desc);
+    if (r && looksLikeChapters(r.items)) r = null;
     seen.push(v.id);
     if (!r) { skipped.push(v); console.log(`Skipped (no recipe in description): ${v.title}`); continue; }
     v.minutes = await videoMinutes(v.id);
@@ -331,4 +338,4 @@ async function main() {
 if (typeof module !== 'undefined' && require.main === module) {
   main().catch(e => { console.error(e); process.exit(1); });
 }
-if (typeof module !== 'undefined') module.exports = { parseRecipe, parseFeed, buildCard, insertCard, refreshCounts, guessCategory };
+if (typeof module !== 'undefined') module.exports = { parseRecipe, looksLikeChapters, parseFeed, buildCard, insertCard, refreshCounts, guessCategory };
