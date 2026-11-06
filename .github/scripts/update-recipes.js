@@ -22,8 +22,8 @@ const CATS = {
 // ---------------------------------------------------------------- parsing --
 
 const URL_RE = /https?:\/\/\S+/g;
-const STOP_RE = /^(tools we use|city steading merch|merch|our favorite|we use the amazon|amazon affiliate|affiliate|support us|patreon|follow us|music|chapters|timestamps|#)/i;
-const SUB_RE = /^(additions?|secondary|in secondary|backsweeten(ing)?|back sweeten(ing)?|to backsweeten|optional|nutrients?|for (the )?(secondary|primary|aging|priming|bottling|backsweetening)|primary|aging|at bottling|priming|flavou?ring|spices?|after fermentation|stabiliz(e|ing|ation))\s*:?$/i;
+const STOP_RE = /^(our pasteurization method|tools we use|city steading merch|merch|our favorite|we use the amazon|amazon affiliate|affiliate|support us|patreon|follow us|music|chapters|timestamps|#)/i;
+const SUB_RE = /^(ingredients\s*[—–-]\s*(us|metric)[a-z ]*|additions?|secondary|in secondary|backsweeten(ing)?|back sweeten(ing)?|to backsweeten|optional|nutrients?|for (the )?(secondary|primary|aging|priming|bottling|backsweetening)|primary|aging|at bottling|priming|flavou?ring|spices?|after fermentation|stabiliz(e|ing|ation))\s*:?$/i;
 
 function cleanLine(s) {
   return s
@@ -116,6 +116,13 @@ function parseRecipe(title, desc) {
     }
     if (/^gravity after|^bottled at|sweetened gravity|^batch (information|info|details|stats)\b/i.test(line)) continue;
     if (/^(\d+(\.\d+)?|one|half an?)\s*(us\s*)?gallons?(\s*batch)?$/i.test(line)) { items.push({ text: 'Makes ' + line.replace(/^one/i, '1') }); continue; }
+    // A yield sentence right under the header ("Makes approximately 1 US gallon of mead
+    // before ... Final volume will be greater.") is a yield line, not the end of the recipe.
+    if (!items.length && /^makes\b/i.test(line) && /\d/.test(line)) {
+      items.push({ text: line.split(/(?<=[.!?])\s+/)[0].replace(/[.!?]$/, '') });
+      blank = 0;
+      continue;
+    }
     // After a blank line, a prose paragraph means the recipe is over.
     if (blank && !looksLikeIngredient(line)) break;
     if (blank && items.length >= 2 && !/\d|½|¼|¾|⅓/.test(line) && !SUB_RE.test(line) && line.length > 50) break;
