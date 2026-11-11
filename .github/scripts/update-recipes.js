@@ -3,9 +3,17 @@
 // card to index.html for each new video whose description contains a recipe.
 // Runs in GitHub Actions (Node 20+, no npm packages needed).
 //
-// Optional: add a repository secret named ANTHROPIC_API_KEY and Claude will
-// write the card from the description. Without it (or if the API call fails)
-// a built-in rule-based parser is used.
+// How a video is handled:
+//   1. The description is read from the feed AND from the video's watch page
+//      (the watch page is the full, current description; the feed copy can be
+//      stale or short). The longer of the two is used.
+//   2. Claude (if ANTHROPIC_API_KEY is set) and then the rule-based parser look
+//      for an ingredient list. If either finds one, a card is added.
+//   3. If the description could not be read (network error), the video is NOT
+//      marked as seen. It is flagged in .github/csb-flagged.json and retried on
+//      the next run (up to MAX_ATTEMPTS).
+//   4. If the description was read but no recipe was found, the video is marked
+//      seen and listed in .github/csb-flagged.json so it can be checked by hand.
 
 'use strict';
 
@@ -13,7 +21,9 @@ const CHANNEL_ID = 'UCqgnJOZ4ity3nQL_xe_hGYg';
 const FEED_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
 const PAGE = 'index.html';
 const SEEN_FILE = '.github/csb-seen.json';
+const FLAG_FILE = '.github/csb-flagged.json';
 const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5';
+const MAX_ATTEMPTS = 3;
 
 const CATS = {
   mead: 'Mead', wine: 'Wine', cider: 'Cider', beer: 'Beer', other: 'Other & Hybrids',
@@ -22,8 +32,9 @@ const CATS = {
 // ---------------------------------------------------------------- parsing --
 
 const URL_RE = /https?:\/\/\S+/g;
-const STOP_RE = /^(our pasteurization method|tools we use|city steading merch|merch|our favorite|we use the amazon|amazon affiliate|affiliate|support us|patreon|follow us|music|chapters|timestamps|#)/i;
-const SUB_RE = /^(ingredients\s*[—–-]\s*(us|metric)[a-z ]*|additions?|secondary|in secondary|backsweeten(ing)?|back sweeten(ing)?|to backsweeten|optional|nutrients?|for (the )?(secondary|primary|aging|priming|bottling|backsweetening)|primary|aging|at bottling|priming|flavou?ring|spices?|after fermentation|stabiliz(e|ing|ation))\s*:?$/i;
+// Lines that mark the end of the recipe block.
+const STOP_RE = /^(our pasteurization method|how we pasteurize|tools we use|equipment we use|city steading merch|merch|our favorite|we use the amazon|amazon affiliate|affiliate|support us|patreon|follow us|music|chapters?\b|time chapters?|timestamps|a few important notes?|important notes?|notes?:|have questions|thanks for watching|become a city steading|want more city steading|other recipes?|related videos?|links?:?$|#)/i;
+const SUB_RE = /^(ingredients\s*[—–-]\s*(us|metric)[a-z ]*|ingredients\s*\((us|metric)[^)]*\)|(us|metric)( measurements?| units?)?|additions?|secondary|in secondary|backsweeten(ing)?|back sweeten(ing)?|to backsweeten|optional|nutrients?|(honey|sugar|fruit) additions?|for (the )?(secondary|primary|aging|priming|bottling|backsweetening)|primary|aging|at bottling|priming|flavou?ring|spices?|after fermentation|stabiliz(e|ing|ation))\s*:?$/i;
 
 function cleanLine(s) {
   return s
@@ -33,8 +44,6 @@ function cleanLine(s) {
     .replace(/\s+/g, ' ')
     .trim();
 }
-
-function num(s) { return s ? s.replace(/\s/g, '') : null; }
 
 // Pull OG / FG / ABV out of a line. Returns null if the line isn't a stats line.
 function statsFromLine(line) {
@@ -48,12 +57,16 @@ function statsFromLine(line) {
   if (/abv|alcohol by volume|approximate alcohol|\balcohol\b/.test(l) && (m = l.match(/(\d{1,2}(?:\.\d{1,2})?)\s*%/))) out.abv = m[1];
   if (!Object.keys(out).length) return null;
   // Lines like "Gravity after backsweetening: 1.024" are not OG/FG.
-  if (/after back ?sweeten|back ?sweeten(ed)? to|bottled at/.test(l)) { delete out.og; delete out.fg; }
+  if (/after back ?sweeten|back ?sweeten(ed)? to|bottled at|sweetened gravity/.test(l)) { delete out.og; delete out.fg; }
   return out;
 }
 
+const QTY_RE = /\d|½|¼|¾|⅓|⅔|⅛|\b(packet|pinch|handful|dash|splash)\b/i;
+
 function looksLikeIngredient(line) {
-  if (!line || line.length > 140) return false;
+  if (!line || line.length > 160) return false;
+  // Starts with a quantity or a quantity word: an ingredient, even if it is long.
+  if (/^(\d|½|¼|¾|⅓|⅔|⅛|(a|an|one|two|three|four|half an?|approximately|approx\.?|about|roughly|additional|optional|a little over|a bit over|just under|enough)\b)/i.test(line)) return true;
   if (/[.!?]$/.test(line) && line.split(' ').length > 12) return false;  // prose sentence
   return true;
 }
@@ -63,7 +76,20 @@ function isRecipeHeader(raw) {
   if (!s || s.length > 160) return false;
   if (/:\s*$/.test(raw.trim()) === false && URL_RE.test(raw)) { URL_RE.lastIndex = 0; return false; } // "Other Recipe: <link>"
   URL_RE.lastIndex = 0;
-  return /\b(recipe|ingredients?)\b/i.test(s) && !/\b(link|links|full recipe (is )?(at|on|here))\b/i.test(s);
+  if (/[.!?]$/.test(s) && s.split(' ').length > 8) return false;   // a sentence that mentions the recipe, not a heading
+  return /\b(recipe|ingredients?)\b/i.test(s) && !/\b(link|links|full recipe (is )?(at|on|here)|recipe video|recipe here|recipes? (playlist|we)|our .* recipe video)\b/i.test(s);
+}
+
+// A line that states the batch size ("Batch size: A little over 1 US gallon ...",
+// "Makes approximately 1 US gallon of mead before ...", "1 gallon batch").
+function yieldText(line) {
+  let m;
+  if ((m = line.match(/^(?:batch size|yield|batch|makes about|this (?:made|makes))\s*:?\s*(.+)$/i)) && /\d|one|half/i.test(m[1])) {
+    return 'Makes ' + m[1].split(/(?<=[.!?])\s+/)[0].replace(/[.!?]$/, '').replace(/^(approximately|about|roughly)\s+/i, 'approximately ').replace(/^A /, 'a ');
+  }
+  if (/^makes\b/i.test(line) && /\d/.test(line)) return line.split(/(?<=[.!?])\s+/)[0].replace(/[.!?]$/, '');
+  if ((m = line.match(/^(\d+(\.\d+)?|one|half an?)\s*(us\s*)?(gallons?|liters?|litres?|l)(\s*batch)?$/i))) return 'Makes ' + line.replace(/^one/i, '1');
+  return null;
 }
 
 function guessCategory(title, items) {
@@ -82,15 +108,16 @@ function guessCategory(title, items) {
 
 // Rule-based parser. Returns null when the description has no recipe.
 function parseRecipe(title, desc) {
-  // Follow-up / troubleshooting / test videos aren't recipe cards.
-  if (/now what\?|mistake\?|\btested\b|q ?& ?a\b/i.test(title)) return null;
-  const lines = desc.replace(/\r/g, '').split('\n');
+  // Follow-up / troubleshooting / test videos aren't recipe cards unless the
+  // description still carries an ingredient list (checked below), so the title
+  // alone no longer rules a video out.
+  const lines = (desc || '').replace(/\r/g, '').split('\n');
   let start = -1;
   for (let i = 0; i < lines.length; i++) {
     if (isRecipeHeader(lines[i])) {
-      // Must be followed (within 3 lines) by something with a quantity.
-      const next = lines.slice(i + 1, i + 4).join(' ');
-      if (/\d|½|¼|¾|⅓|packet|pinch|handful/i.test(next)) { start = i; break; }
+      // Must be followed (within 6 lines) by something with a quantity.
+      const next = lines.slice(i + 1, i + 7).join(' ');
+      if (QTY_RE.test(next)) { start = i; break; }
     }
   }
   if (start < 0) return null;
@@ -100,14 +127,14 @@ function parseRecipe(title, desc) {
   const header = lines[start].replace(URL_RE, '').trim();
   const yieldM = header.match(/\(([^)]*(gallon|liter|litre|\bL\b|batch)[^)]*)\)/i);
   if (yieldM) items.push({ text: yieldM[1].replace(/^this (made|makes)\s*/i, 'Makes ').replace(/\s*of finished \w+\.?$/i, '').replace(/\.$/, '') });
-  // Header line may itself be "Ingredients: 1 gallon apple juice, ..." — ignore that edge case.
 
   let blank = 0;
   for (let i = start + 1; i < lines.length; i++) {
     const raw = lines[i];
     const line = cleanLine(raw);
-    if (!line) { blank++; if (blank >= 2 && items.length) break; continue; }
+    if (!line) { blank++; if (blank >= 2 && items.filter(x => !x.sub).length >= 2) break; continue; }
     if (STOP_RE.test(line)) break;
+    if (/^\(?\d{1,2}:\d{2}\b/.test(line)) break;                       // chapter list
     const st = statsFromLine(line);
     if (st && (/^(o\.?g|f\.?g|abv|s\.?g|original|starting|final|approx|estimated|ending|gravity|[01]\.\d{3})/i.test(line) || line.length < 60)) {
       Object.assign(stats, Object.fromEntries(Object.entries(st).filter(([k]) => !stats[k])));
@@ -115,19 +142,22 @@ function parseRecipe(title, desc) {
       continue;
     }
     if (/^gravity after|^bottled at|sweetened gravity|^batch (information|info|details|stats)\b/i.test(line)) continue;
-    if (/^(\d+(\.\d+)?|one|half an?)\s*(us\s*)?gallons?(\s*batch)?$/i.test(line)) { items.push({ text: 'Makes ' + line.replace(/^one/i, '1') }); continue; }
-    // A yield sentence right under the header ("Makes approximately 1 US gallon of mead
-    // before ... Final volume will be greater.") is a yield line, not the end of the recipe.
-    if (!items.length && /^makes\b/i.test(line) && /\d/.test(line)) {
-      items.push({ text: line.split(/(?<=[.!?])\s+/)[0].replace(/[.!?]$/, '') });
+    const y = yieldText(line);
+    if (y) {
+      if (!items.some(x => /^makes\b/i.test(x.text))) items.unshift({ text: y });
       blank = 0;
       continue;
     }
-    // After a blank line, a prose paragraph means the recipe is over.
-    if (blank && !looksLikeIngredient(line)) break;
-    if (blank && items.length >= 2 && !/\d|½|¼|¾|⅓/.test(line) && !SUB_RE.test(line) && line.length > 50) break;
+    const real = items.filter(x => !x.sub);
+    // A second heading ("DANDELION WINE RECIPE") before any ingredient is the
+    // real start of the list; the earlier match was an intro line.
+    if (!real.length && isRecipeHeader(raw)) { blank = 0; continue; }
+    // A prose paragraph after the list means the recipe is over; a prose
+    // sentence before it (an intro line under the header) is just skipped.
+    if (blank && real.length && !looksLikeIngredient(line)) break;
+    if (blank && real.length >= 2 && !QTY_RE.test(line) && !SUB_RE.test(line) && line.length > 50) break;
     blank = 0;
-    if (!looksLikeIngredient(line)) break;
+    if (!looksLikeIngredient(line)) { if (real.length) break; else continue; }
     if (SUB_RE.test(line) || (!/https?:\/\//.test(raw) && /:$/.test(raw.trim()) && !/\d/.test(line) && line.length < 40)) {
       items.push({ text: line.replace(/:$/, ''), sub: true });
       continue;
@@ -183,9 +213,9 @@ Reply with ONLY a JSON object, no other text:
  "items": [{"text": "ingredient line", "sub": false}, ...]}
 
 Rules:
-- is_recipe is false if the description has no ingredient list for a brew made in the video (e.g. yeast comparisons, Q&A, troubleshooting, tasting-only or follow-up videos).
+- is_recipe is true whenever the description contains an ingredient list (with quantities) for a brew made in the video, even if the video is framed as a test, comparison or "was it worth it" video. It is false only when there is no ingredient list (e.g. Q&A, troubleshooting, tasting-only or follow-up videos).
 - Copy ingredient lines as written in the description (quantities and units as given), minus links, affiliate notes and "thanks" asides. If a batch size is stated, make the first item "Makes <size>".
-- Use {"text": "Additions", "sub": true} style entries only for sub-headings the description itself uses (Additions, Backsweetening, Secondary, ...).
+- Use {"text": "Additions", "sub": true} style entries only for sub-headings the description itself uses (Ingredients - US Measurements, Ingredients - Metric Measurements, Additions, Backsweetening, Secondary, ...).
 - category: "other" for braggots, hard seltzers, ginger beer, kombucha, grog and hybrids; "mead" when honey is the main fermentable (including cysers, melomels, pyments); "cider" for apple/pear ciders; "beer" for malt/grain beers, gruits, shandy; "wine" for everything else (fruit/juice/sugar wines, kilju, skeeter pee).
 - og/fg/abv only if stated in the description or the title; never invent them.`;
   try {
@@ -211,6 +241,18 @@ Rules:
   }
 }
 
+// Claude first (if configured), then the rule parser. The rule parser also runs
+// when Claude says "not a recipe", so a recipe that is plainly in the
+// description is never dropped on one opinion.
+async function findRecipe(title, desc) {
+  let r = await parseWithClaude(title, desc);
+  let via = 'Claude';
+  if (r && looksLikeChapters(r.items)) r = null;
+  if (!r) { r = parseRecipe(title, desc); via = 'rules'; }
+  if (r && looksLikeChapters(r.items)) r = null;
+  return { recipe: r, via };
+}
+
 // ------------------------------------------------------------------- HTML --
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
@@ -233,12 +275,25 @@ function buildCard(v, r) {
 </article>`;
 }
 
+// Insert the card in date order (newest first) within its section.
 function insertCard(html, category, card) {
   const secAt = html.indexOf(`<section class="drink" id="${category}"`);
   if (secAt < 0) throw new Error('Section not found: ' + category);
   const gridTag = '<div class="grid">';
   const g = html.indexOf(gridTag, secAt);
-  return html.slice(0, g + gridTag.length) + card + html.slice(g + gridTag.length);
+  const gridStart = g + gridTag.length;
+  const date = (card.match(/data-date="(\d{4}-\d{2}-\d{2})"/) || [])[1] || '9999';
+  const secEnd = (() => { const n = html.indexOf('<section class="drink"', gridStart); const s = html.indexOf('<script', gridStart); return Math.min(...[n, s].filter(x => x >= 0)); })();
+  // Walk the existing cards in this section and stop at the first one older than ours.
+  const re = /<article class="card"[^>]*data-date="(\d{4}-\d{2}-\d{2})"/g;
+  re.lastIndex = gridStart;
+  let at = gridStart, m;
+  while ((m = re.exec(html)) && m.index < secEnd) {
+    if (m[1] <= date) { at = m.index; break; }
+    at = html.indexOf('</article>', m.index) + '</article>'.length;
+    re.lastIndex = at;
+  }
+  return html.slice(0, at) + card + html.slice(at);
 }
 
 // Recompute every count on the page from the cards themselves.
@@ -286,57 +341,101 @@ function parseFeed(xml) {
   });
 }
 
-async function videoMinutes(id) {
-  try {
-    const r = await fetch('https://www.youtube.com/watch?v=' + id, { headers: { 'accept-language': 'en-US,en;q=0.9', 'user-agent': 'Mozilla/5.0' } });
-    const t = await r.text();
-    const m = t.match(/"lengthSeconds":"(\d+)"/) || t.match(/itemprop="duration" content="PT(\d+)M/);
-    if (!m) return null;
-    return t.includes('"lengthSeconds"') ? Math.round(+m[1] / 60) : +m[1];
-  } catch { return null; }
+// Read the video's watch page: the full description (from the player JSON) and
+// the length in minutes. Returns null if the page could not be read.
+async function fetchWatchPage(id, tries = 3) {
+  for (let i = 1; i <= tries; i++) {
+    try {
+      const r = await fetch('https://www.youtube.com/watch?v=' + id + '&hl=en', {
+        headers: { 'accept-language': 'en-US,en;q=0.9', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36', cookie: 'CONSENT=YES+1' },
+      });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const t = await r.text();
+      let desc = null;
+      const dm = t.match(/"shortDescription":"((?:[^"\\]|\\.)*)"/);
+      if (dm) { try { desc = JSON.parse('"' + dm[1] + '"'); } catch { desc = null; } }
+      const lm = t.match(/"lengthSeconds":"(\d+)"/) || t.match(/itemprop="duration" content="PT(\d+)M/);
+      const minutes = lm ? (t.includes('"lengthSeconds"') ? Math.round(+lm[1] / 60) : +lm[1]) : null;
+      if (desc === null && minutes === null) throw new Error('page had no player data');
+      return { desc, minutes };
+    } catch (e) {
+      console.log(`  watch page for ${id} failed (try ${i}/${tries}): ${e.message}`);
+      if (i < tries) await new Promise(res => setTimeout(res, 2000 * i));
+    }
+  }
+  return null;
 }
 
 // ------------------------------------------------------------------- main --
 
+function readJson(fs, file, dflt) { try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return dflt; } }
+
 async function main() {
   const fs = require('fs');
   let html = fs.readFileSync(PAGE, 'utf8');
-  let seen = [];
-  try { seen = JSON.parse(fs.readFileSync(SEEN_FILE, 'utf8')); } catch {}
+  const seen = readJson(fs, SEEN_FILE, []);
+  let flagged = readJson(fs, FLAG_FILE, []);
+  if (!Array.isArray(flagged)) flagged = [];
 
-  const newest = [...html.matchAll(/data-date="(\d{4}-\d{2}-\d{2})"/g)].map(m => m[1]).sort().pop();
   const res = await fetch(FEED_URL);
   if (!res.ok) throw new Error('Feed fetch failed: ' + res.status);
   const feed = parseFeed(await res.text());
-  console.log(`Feed has ${feed.length} videos; newest card on the site is ${newest}.`);
+  console.log(`Feed has ${feed.length} videos.`);
 
+  // Every feed video that is neither on the page nor marked seen is checked,
+  // whatever its date, so a video missed once is not locked out by a newer card.
   const todo = feed
-    .filter(v => v.id && v.date >= newest && !seen.includes(v.id) && !html.includes(`id="v-${v.id}"`))
+    .filter(v => v.id && !seen.includes(v.id) && !html.includes(`id="v-${v.id}"`))
     .sort((a, b) => a.published.localeCompare(b.published));
   if (!todo.length) { console.log('No new videos.'); return; }
 
-  const added = [], skipped = [];
+  const added = [], noRecipe = [], unread = [];
   for (const v of todo) {
-    let r = await parseWithClaude(v.title, v.desc);
-    const via = r === undefined ? 'rules' : 'Claude';
-    if (r === undefined) r = parseRecipe(v.title, v.desc);
-    if (r && looksLikeChapters(r.items)) r = null;
-    seen.push(v.id);
-    if (!r) { skipped.push(v); console.log(`Skipped (no recipe in description): ${v.title}`); continue; }
-    v.minutes = await videoMinutes(v.id);
-    html = insertCard(html, r.category, buildCard(v, r));
-    added.push(v);
-    console.log(`Added [${r.category}] via ${via}: ${v.title} (${r.items.length} lines)`);
+    console.log(`Checking: ${v.title} (${v.id}, ${v.date})`);
+    const page = await fetchWatchPage(v.id);
+    let desc = v.desc || '';
+    if (page) {
+      v.minutes = page.minutes;
+      if (page.desc && page.desc.length > desc.length) desc = page.desc;
+    }
+    const { recipe, via } = await findRecipe(v.title, desc);
+
+    if (recipe) {
+      html = insertCard(html, recipe.category, buildCard(v, recipe));
+      seen.push(v.id);
+      flagged = flagged.filter(f => f.id !== v.id);
+      added.push(v);
+      console.log(`  Added [${recipe.category}] via ${via}: ${v.title} (${recipe.items.length} lines)`);
+      continue;
+    }
+
+    const prev = flagged.find(f => f.id === v.id);
+    const attempts = (prev ? prev.attempts : 0) + 1;
+    const entry = { id: v.id, title: v.title, date: v.date, attempts, last: new Date().toISOString().slice(0, 10) };
+    if (!page && attempts < MAX_ATTEMPTS) {
+      // Could not read the full description: do not mark seen, retry next run.
+      entry.reason = 'watch page could not be read; will retry';
+      unread.push(v);
+      console.log(`  Unread (watch page failed, attempt ${attempts}/${MAX_ATTEMPTS}); will retry next run: ${v.title}`);
+    } else {
+      entry.reason = page ? 'no ingredient list found in description; check by hand' : `watch page unreadable ${attempts} times; feed description had no recipe; check by hand`;
+      seen.push(v.id);
+      noRecipe.push(v);
+      console.log(`  No recipe found: ${v.title}`);
+    }
+    flagged = [...flagged.filter(f => f.id !== v.id), entry];
   }
   if (added.length) {
     html = refreshCounts(html);
     fs.writeFileSync(PAGE, html);
   }
   fs.writeFileSync(SEEN_FILE, JSON.stringify(seen.slice(-200), null, 1) + '\n');
+  fs.writeFileSync(FLAG_FILE, JSON.stringify(flagged.slice(-100), null, 1) + '\n');
 
   const summary = [
     added.length ? `Added: ${added.map(v => v.title).join('; ')}` : '',
-    skipped.length ? `Skipped (no recipe): ${skipped.map(v => v.title).join('; ')}` : '',
+    noRecipe.length ? `No recipe found (listed in ${FLAG_FILE}, check by hand): ${noRecipe.map(v => v.title).join('; ')}` : '',
+    unread.length ? `Could not read description, will retry next run: ${unread.map(v => v.title).join('; ')}` : '',
   ].filter(Boolean).join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary.replace(/\n/g, '\n\n') + '\n');
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `added=${added.length}\ntitles=${added.map(v => v.title).join('; ').replace(/\n/g, ' ')}\n`);
@@ -345,4 +444,4 @@ async function main() {
 if (typeof module !== 'undefined' && require.main === module) {
   main().catch(e => { console.error(e); process.exit(1); });
 }
-if (typeof module !== 'undefined') module.exports = { parseRecipe, looksLikeChapters, parseFeed, buildCard, insertCard, refreshCounts, guessCategory };
+if (typeof module !== 'undefined') module.exports = { parseRecipe, looksLikeChapters, parseFeed, buildCard, insertCard, refreshCounts, guessCategory, fetchWatchPage, findRecipe };
