@@ -412,13 +412,15 @@ async function main() {
     const prev = flagged.find(f => f.id === v.id);
     const attempts = (prev ? prev.attempts : 0) + 1;
     const entry = { id: v.id, title: v.title, date: v.date, attempts, last: new Date().toISOString().slice(0, 10) };
-    if (!page && attempts < MAX_ATTEMPTS) {
+    // GitHub's runners are often refused by YouTube's watch pages, so a failed
+    // watch page only counts as "unread" when the feed copy is missing or short.
+    if (!page && desc.length < 400 && attempts < MAX_ATTEMPTS) {
       // Could not read the full description: do not mark seen, retry next run.
       entry.reason = 'watch page could not be read; will retry';
       unread.push(v);
       console.log(`  Unread (watch page failed, attempt ${attempts}/${MAX_ATTEMPTS}); will retry next run: ${v.title}`);
     } else {
-      entry.reason = page ? 'no ingredient list found in description; check by hand' : `watch page unreadable ${attempts} times; feed description had no recipe; check by hand`;
+      entry.reason = page ? 'no ingredient list found in description; check by hand' : 'watch page not readable from GitHub; no ingredient list in the feed description; check by hand';
       seen.push(v.id);
       noRecipe.push(v);
       console.log(`  No recipe found: ${v.title}`);
