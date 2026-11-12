@@ -1,0 +1,136 @@
+{
+  "observed_at": "2026-11-12T01:03:32.380284+00:00",
+  "environment_scope": "This execution environment; not a guarantee for GitHub Actions or the user’s computer.",
+  "watch_metadata": {
+    "status": "working",
+    "tested_videos": [
+      "geBml1e3zFY",
+      "EFPxb3n2Wuc",
+      "wkMfTcUg4IY",
+      "TM83WJvfKBA",
+      "qupXap5BBOE",
+      "AtZE2YKbeUA",
+      "-0mXCpl6KfY",
+      "vXMZRdNbNvc",
+      "SP9adI1mLoA",
+      "mK0d4ulSvrw"
+    ],
+    "description_provenance": "shortDescription in watch-page player JSON; not spoken transcript"
+  },
+  "direct_signed_captions": {
+    "video_id": "EFPxb3n2Wuc",
+    "status": "failed",
+    "json3_http_status": 200,
+    "json3_bytes": 0,
+    "xml_http_status": 200,
+    "xml_bytes": 0
+  },
+  "page_scrape_fallback": {
+    "video_id": "EFPxb3n2Wuc",
+    "status": "description_and_chapters_only",
+    "note": "Page contains Show transcript but no spoken captions; comments and recommendations excluded."
+  },
+  "connected_provider": {
+    "provider": "Firecrawl youtube-com/videos/video_transcript",
+    "observed_credit_cost_per_success": 5,
+    "latest_results": [
+      {
+        "video_id": "qupXap5BBOE",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "29932036-62e0-4bba-8f3c-df93243a9dea",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "EFPxb3n2Wuc",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "5bb92e6b-4ab8-4de1-b02b-1774bdfd513f",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "geBml1e3zFY",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "8b27b9f4-274f-46a5-9830-2c2dc75692d5",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "AtZE2YKbeUA",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "c41bd0ab-f584-4d96-9cd8-1f3512270b6b",
+        "status": "failed",
+        "error": {
+          "code": "provider_rate_limited",
+          "message": "The data source is rate-limiting requests. Retry after the Retry-After interval.",
+          "status": 429,
+          "retryAfterSeconds": 60
+        }
+      },
+      {
+        "video_id": "-0mXCpl6KfY",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "fb509a9d-292a-4449-9813-5490fce0d10a",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "wkMfTcUg4IY",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "6a66546d-ab6a-48e8-b5bf-a4904f432d7b",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "TM83WJvfKBA",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "bbaf9c0b-f049-4a9b-8882-985f280298b6",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "vXMZRdNbNvc",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "460fc42e-b9eb-435d-80ba-abf3d7795cc8",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "SP9adI1mLoA",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "af8aaaae-f6a5-4cd0-bba0-edade21d2f87",
+        "status": "retrieved",
+        "error": null
+      },
+      {
+        "video_id": "mK0d4ulSvrw",
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "request_id": "23fcfa5f-60d6-4115-9123-5bbf9fbe2a38",
+        "status": "retrieved",
+        "error": null
+      }
+    ],
+    "default_language_warning": "qupXap5BBOE and AtZE2YKbeUA defaulted to Arabic ASR. Only selected English tracks were accepted into the pilot.",
+    "retention_note": "Full provider results exported in timed chunks and segment counts checked; private state retains English sources only."
+  },
+  "official_youtube_api": {
+    "used": false,
+    "reason": "No assumption of permission to download another creator’s captions."
+  },
+  "audio": {
+    "downloaded": false,
+    "transcribed": false
+  },
+  "pilot_totals": {
+    "videos": 10,
+    "english_caption_backed": 9,
+    "description_only": 1,
+    "findings": 75
+  },
+  "billing": {
+    "transcript_credits_observed": 55,
+    "page_scrape_credits_observed": 1,
+    "dollar_conversion": "unknown; depends on account plan",
+    "recurring_jobs_enabled": false
+  }
+}

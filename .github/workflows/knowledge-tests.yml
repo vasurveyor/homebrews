@@ -1,0 +1,18 @@
+name: Knowledge pilot checks
+on:
+  pull_request:
+    paths: ['knowledge/**', '.github/workflows/knowledge-tests.yml']
+  push:
+    paths: ['knowledge/**', '.github/workflows/knowledge-tests.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s knowledge/tests -v
+      - run: python -m knowledge validate
