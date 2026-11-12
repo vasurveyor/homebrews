@@ -1,0 +1,9 @@
+# Full transcripts may contain copyrighted material and are intentionally private.
+knowledge/private/
+
+# Local credentials and generated scratch files.
+.env
+.env.*
+!.env.example
+knowledge/tmp/
+

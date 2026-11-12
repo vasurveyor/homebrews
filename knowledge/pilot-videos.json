@@ -1,0 +1,13 @@
+[
+  {"video_id":"0tVJ07b6HdA","role":"recipe","group":"creamsicle"},
+  {"video_id":"GvM3nQdeDu0","role":"follow_up_tasting","group":"creamsicle"},
+  {"video_id":"qupXap5BBOE","role":"comparison","group":"stabilization"},
+  {"video_id":"euOXXbi0f9A","role":"instruction","group":"fermentation"},
+  {"video_id":"yv044DK1Ifc","role":"troubleshooting","group":"fermentation"},
+  {"video_id":"TM62rfUZ6Xw","role":"experiment","group":"sweetening"},
+  {"video_id":"HxWJQygomxM","role":"recipe","group":"stabilization"},
+  {"video_id":"uPur05swq2U","role":"recipe","group":"step_feeding"},
+  {"video_id":"bNW-ZsWL1DM","role":"instructional_recipe","group":"full_process"},
+  {"video_id":"MoBq0QayjPY","role":"recipe_and_tasting","group":"apple_butter"}
+]
+

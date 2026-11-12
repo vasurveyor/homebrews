@@ -1,0 +1,34 @@
+{
+  "tested_at": "2026-11-12T12:00:00Z",
+  "environment": "Codex Windows execution environment",
+  "tests": [
+    {
+      "method": "youtube_watch_page",
+      "result": "success",
+      "detail": "HTTP 200; player metadata and captionTracks were present."
+    },
+    {
+      "method": "direct_caption_track_url_json3",
+      "result": "failure",
+      "videos_tested": 10,
+      "detail": "Advertised timed-text URLs returned HTTP success with empty response bodies."
+    },
+    {
+      "method": "youtube-transcript-api 1.2.3",
+      "result": "success",
+      "videos_tested": 10,
+      "detail": "All selected videos returned timestamped English auto-caption segments."
+    },
+    {
+      "method": "official_youtube_data_api_caption_download",
+      "result": "not_attempted",
+      "detail": "No credentials requested; pipeline does not assume caption-download authorization for another creator."
+    },
+    {
+      "method": "audio_transcription",
+      "result": "not_attempted",
+      "detail": "No audio was downloaded and no paid transcription was enabled."
+    }
+  ]
+}
+

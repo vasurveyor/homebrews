@@ -1,0 +1,15 @@
+{
+  "name": "csb-source-backed-knowledge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Portable, source-backed brewing knowledge pilot for the CSB Recipe Box",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "knowledge:import": "node knowledge/scripts/import-video.js",
+    "knowledge:validate": "node knowledge/scripts/validate.js",
+    "knowledge:ask": "node knowledge/scripts/ask.js",
+    "knowledge:export": "node knowledge/scripts/export-obsidian.js"
+  },
+  "engines": { "node": ">=20" }
+}
+
