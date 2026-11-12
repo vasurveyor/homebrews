@@ -6,4 +6,5 @@ knowledge/private/
 .env.*
 !.env.example
 knowledge/tmp/
+.venv/
 

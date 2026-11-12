@@ -1,4 +1,4 @@
-"""Fetch public YouTube captions for pilot videos.
+"""Fetch public YouTube captions for recipe-box or explicitly supplied videos.
 
 Requires: pip install youtube-transcript-api==1.2.3
 Full transcripts are written under knowledge/private/ (gitignored).
@@ -29,12 +29,23 @@ def save(path: Path, value) -> None:
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def concise_failure(error: Exception) -> str:
+    name = type(error).__name__
+    if name in {"IpBlocked", "RequestBlocked"}:
+        return f"{name}: YouTube blocked requests from this execution environment."
+    return f"{name}: {str(error).strip()[:500]}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("video_ids", nargs="*")
+    parser.add_argument("--retry-failed", action="store_true")
+    parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
-    pilot = load(KNOWLEDGE / "pilot-videos.json", [])
-    ids = args.video_ids or [item["video_id"] for item in pilot]
+    inventory = load(KNOWLEDGE / "recipe-box-videos.json", [])
+    if not inventory:
+        inventory = load(KNOWLEDGE / "pilot-videos.json", [])
+    ids = list(dict.fromkeys(args.video_ids or [item["video_id"] for item in inventory]))
     manifest_path = KNOWLEDGE / "import-manifest.json"
     manifest = load(manifest_path, {"schema_version": 1, "extraction_version": "0.1.0", "videos": {}})
     api = YouTubeTranscriptApi()
@@ -42,6 +53,13 @@ def main() -> int:
 
     for video_id in ids:
         old = manifest["videos"].get(video_id, {})
+        old_status = old.get("transcript", {}).get("status")
+        if not args.force and old_status == "available":
+            print(f"{video_id}: skipped (already available)")
+            continue
+        if not args.force and old_status == "failed" and not args.retry_failed:
+            print(f"{video_id}: skipped (previous failure; use --retry-failed)")
+            continue
         try:
             transcript = api.fetch(video_id, languages=["en"])
             segments = [
@@ -69,7 +87,7 @@ def main() -> int:
             failures += 1
             old["transcript"] = {
                 "status": "failed", "source": None, "access_method": "youtube-transcript-api 1.2.3",
-                "timestamps": False, "failure": f"{type(error).__name__}: {error}",
+                "timestamps": False, "failure": concise_failure(error),
             }
             print(f"{video_id}: failed ({type(error).__name__})")
         old.update({

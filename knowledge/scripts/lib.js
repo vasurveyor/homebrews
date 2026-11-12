@@ -34,5 +34,13 @@ function allVideoRecords() {
   return fs.readdirSync(dir).filter(x => x.endsWith('.json')).map(x => readJson(path.join(dir, x))).filter(Boolean);
 }
 
-module.exports = { ROOT, KNOWLEDGE, readJson, writeJson, timestamp, youtubeUrl, allVideoRecords };
+function mergedKnowledgeVideos() {
+  const catalog = readJson(path.join(KNOWLEDGE, 'videos', 'recipe-box.json'), { videos: [] }).videos || [];
+  const pilot = readJson(path.join(KNOWLEDGE, 'videos', 'pilot.json'), { videos: [] }).videos || [];
+  const byId = new Map(catalog.map(video => [video.video_id, video]));
+  for (const video of pilot) byId.set(video.video_id, video);
+  return [...byId.values()].sort((a, b) => (b.publication_date || '').localeCompare(a.publication_date || ''));
+}
+
+module.exports = { ROOT, KNOWLEDGE, readJson, writeJson, timestamp, youtubeUrl, allVideoRecords, mergedKnowledgeVideos };
 

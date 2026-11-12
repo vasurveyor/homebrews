@@ -15,6 +15,14 @@ npm run knowledge:export
 
 The search is deliberately lexical and dependency-free. It is small, inspectable, and adequate for this pilot; semantic search would add cost and make evidence selection harder to audit without a demonstrated retrieval problem.
 
+### Sync the full Recipe Box without duplicates
+
+`npm run knowledge:sync` reads the existing recipe cards, keys records by the canonical 11-character YouTube video ID, rejects mismatched card/URL IDs, and skips duplicate IDs. It writes a portable inventory plus catalog-only knowledge records. Reviewed pilot records override matching catalog records during search and export, so the seven pilot videos also present in the Recipe Box are not duplicated.
+
+Catalog-only records preserve the existing card's title, date, category, ingredients, and stated gravity/ABV, but are explicitly marked `catalog_only_needs_transcript_review`. They are not presented as transcript-backed findings. Fetch captions with `.venv\\Scripts\\python.exe knowledge\\scripts\\fetch-captions.py`; successful prior imports are skipped, failures remain retryable with `--retry-failed`, and `--force` reprocesses every requested ID. The normal Obsidian export includes reviewed records only; add `--include-catalog` when provisional catalog-only notes are wanted.
+
+The 2026-11-12 full Recipe Box attempt retained the seven previously successful recipe-video transcripts and recorded `IpBlocked` for all 295 new IDs. Those failures are intentionally committed in the manifest so another environment can retry them without treating the catalog fields as transcript evidence.
+
 ### Transcript access tested on 2026-11-12
 
 | Method | Result in this environment |

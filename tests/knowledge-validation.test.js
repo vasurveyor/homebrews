@@ -7,7 +7,7 @@ const path = require('node:path');
 test('pilot knowledge passes traceability validation', () => {
   const run = spawnSync(process.execPath, ['knowledge/scripts/validate.js'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
   assert.equal(run.status, 0, run.stderr || run.stdout);
-  assert.match(run.stdout, /Validated 10 videos/);
+  assert.match(run.stdout, /Validated 10 reviewed videos, 302 unique recipe-box videos/);
 });
 
 test('unsupported queries return insufficient evidence', () => {
