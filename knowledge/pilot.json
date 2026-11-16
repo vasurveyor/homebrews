@@ -1,0 +1,2633 @@
+{
+  "schema_version": 1,
+  "pilot_imported_at": "2026-11-12T01:04:38.520607+00:00",
+  "videos": [
+    {
+      "id": "geBml1e3zFY",
+      "title": "Avocado Mead - Really?",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=geBml1e3zFY",
+      "published_at": "2021-07-16T06:23:55-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "honey",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 1/2 lbs Bee Natural Avocado Honey",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 1/2 lbs Bee Natural Avocado Honey",
+            "role": "ingredient",
+            "normalized": {
+              "value": 1133.980925,
+              "unit": "g",
+              "method": "calculated",
+              "inputs": {
+                "original_value": 2.5,
+                "original_unit": "lb",
+                "factor_g_per_lb": 453.59237
+              }
+            }
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 1/2 lbs Bee Natural Avocado Honey",
+              "start_ms": null,
+              "source_sha256": "879e6b9435e6ff6aa04d105cdc24493bded4df23dd1695cf4c84c85faa237b9e"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "water",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "Warm Water to make a gallon of must (roughly 96 ounces or 2700 ml)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "Warm Water to make a gallon of must (roughly 96 ounces or 2700 ml)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Warm Water to make a gallon of must (roughly 96 ounces or 2700 ml)",
+              "start_ms": null,
+              "source_sha256": "879e6b9435e6ff6aa04d105cdc24493bded4df23dd1695cf4c84c85faa237b9e"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": [
+            "Creator gives approximate alternatives; 96 US fl oz is about 2839 mL, not 2700 mL. No exact equivalence asserted."
+          ]
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "Lalvin 71B yeast",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "Lalvin 71B yeast",
+            "role": "yeast",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Lalvin 71B yeast",
+              "start_ms": null,
+              "source_sha256": "879e6b9435e6ff6aa04d105cdc24493bded4df23dd1695cf4c84c85faa237b9e"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "og",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "The measured original gravity is reported as 1.096.",
+          "stage": "primary",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                374,
+                385
+              ],
+              "start_ms": 782079,
+              "passage": "2021. this year is like gone and the initial reading which is going to be 1.096 so either",
+              "source_sha256": "aa9bc8b676974626ebec356ac39dfe8f0ba09bc875e8f7ae02f1cd47b1966399"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.096",
+            "role": "original_gravity",
+            "value": 1.096
+          }
+        },
+        {
+          "id": "mix",
+          "kind": "technique",
+          "mode": "creator_advice",
+          "summary": "Mix thoroughly before reading gravity; they report an earlier unmixed sample gave 1.020 rather than 1.096.",
+          "stage": "primary",
+          "topics": [
+            "gravity",
+            "mixing"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                401,
+                424
+              ],
+              "start_ms": 839040,
+              "passage": "is i did that i didn't shake it up again and i took a reading and it came",
+              "source_sha256": "aa9bc8b676974626ebec356ac39dfe8f0ba09bc875e8f7ae02f1cd47b1966399"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "temp",
+          "kind": "temperature",
+          "mode": "batch_result",
+          "summary": "They report a steady room temperature of “79 degrees”; the cited passage does not explicitly name a unit.",
+          "stage": "primary",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                526,
+                541
+              ],
+              "start_ms": 1079760,
+              "passage": "area that is dark we just like it that way temperature a lot of people ask this our",
+              "source_sha256": "aa9bc8b676974626ebec356ac39dfe8f0ba09bc875e8f7ae02f1cd47b1966399"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Unit not explicitly stated; no temperature conversion performed."
+          ],
+          "measurement": {
+            "original": "79 degrees",
+            "role": "ambient_temperature",
+            "value": 79,
+            "unit": null
+          }
+        }
+      ],
+      "relations": [],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "aa9bc8b676974626ebec356ac39dfe8f0ba09bc875e8f7ae02f1cd47b1966399",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 633
+      }
+    },
+    {
+      "id": "EFPxb3n2Wuc",
+      "title": "Avocado Mead - Additions, Flavor Adjustments, Back Sweetening and a Pasteurizing Test!",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=EFPxb3n2Wuc",
+      "published_at": "2021-07-20T05:43:12-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "early",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "At 12 days the reading was 1.016; they explicitly did not consider it finished.",
+          "stage": "primary",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                129,
+                140
+              ],
+              "start_ms": 255280,
+              "passage": "and if you remember this started at 1.096 original gravity and right now it is 1.016 so it",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.016",
+            "role": "intermediate_gravity",
+            "value": 1.016
+          }
+        },
+        {
+          "id": "fg",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "A later 1.012 reading remained unchanged for a couple of weeks before additions.",
+          "stage": "after_fermentation",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                322,
+                328
+              ],
+              "start_ms": 681600,
+              "passage": "and take that back just you know going back and forth here okay so it's 1.012 which means",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.012",
+            "role": "fermentation_final_gravity",
+            "value": 1.012
+          }
+        },
+        {
+          "id": "taste_before",
+          "kind": "tasting",
+          "mode": "batch_result",
+          "summary": "Before spicing, they describe raisiny, tannic and toffee notes and say it is not a favorite.",
+          "stage": "after_fermentation",
+          "topics": [
+            "tasting",
+            "avocado",
+            "followup"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                359,
+                389
+              ],
+              "start_ms": 764959,
+              "passage": "okay i don't mind this as much as i did last time it's kind of raisiny actually has",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "clove",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 small Whole Clove",
+          "stage": "secondary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 small Whole Clove",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 small Whole Clove",
+              "start_ms": null,
+              "source_sha256": "d5fcf2fffd9ec0786ab4d5cd0206e726d3487024da3ea6a1295bcfdc007615fb"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "cardamom",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 cracked Cardamom pods",
+          "stage": "secondary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 cracked Cardamom pods",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 cracked Cardamom pods",
+              "start_ms": null,
+              "source_sha256": "d5fcf2fffd9ec0786ab4d5cd0206e726d3487024da3ea6a1295bcfdc007615fb"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "allspice",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "20 Allspice Berries",
+          "stage": "secondary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "20 Allspice Berries",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "20 Allspice Berries",
+              "start_ms": null,
+              "source_sha256": "d5fcf2fffd9ec0786ab4d5cd0206e726d3487024da3ea6a1295bcfdc007615fb"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "time",
+          "kind": "aging",
+          "mode": "batch_result",
+          "summary": "They report removing the spices after about ten days, longer than their initial one-week plan.",
+          "stage": "secondary",
+          "topics": [
+            "spices",
+            "aging"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                630,
+                646
+              ],
+              "start_ms": 1318960,
+              "passage": "we're going to let it sit and how long i'm going to say a week because those spices",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "taste_after",
+          "kind": "tasting",
+          "mode": "batch_result",
+          "summary": "After spicing, they report stronger spice aromas and say they were not thrilled before the spices.",
+          "stage": "secondary",
+          "topics": [
+            "tasting",
+            "avocado",
+            "followup"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                783,
+                792
+              ],
+              "start_ms": 1627600,
+              "passage": "on the smell oh yeah those spices are coming through it really is starting to smell like a",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "sweet_gravity",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "The pre-heating, sweetened brew is reported at 1.022; this is separate from fermentation final gravity.",
+          "stage": "backsweetening",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                1348,
+                1359
+              ],
+              "start_ms": 2796640,
+              "passage": "alcohol has left the building then the specific gravity should change right even if it's a few points",
+              "source_sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.022",
+            "role": "post_backsweetening_gravity",
+            "value": 1.022
+          }
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "geBml1e3zFY",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "geBml1e3zFY",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "0a2ee3f05005ffa62ed0e1e98a3a1daa28538b517caef975b0f8aa3fc8de7d5f",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 1571
+      }
+    },
+    {
+      "id": "wkMfTcUg4IY",
+      "title": "Our Backsweetening Secrets for Homemade Mead, Wine and Cider",
+      "creator": "City Steading Fermenstation",
+      "creator_id": "UCDU3HwjzqFCLNBbTSrAXUCA",
+      "url": "https://www.youtube.com/watch?v=wkMfTcUg4IY",
+      "published_at": "2026-02-16T06:01:29-08:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "target",
+          "kind": "technique",
+          "mode": "creator_advice",
+          "summary": "There is no single preferred sweetened gravity: choose sweetness to suit the brew and personal taste.",
+          "stage": "backsweetening",
+          "topics": [
+            "backsweetening",
+            "target",
+            "gravity"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                128,
+                142
+              ],
+              "start_ms": 262079,
+              "passage": ">> I have had people ask me, \"What is your preferred final gravity after back sweetening?\" >> It",
+              "source_sha256": "d5aea0ba27146eb5ed697bcd8b121b42cf27e9f55f5160fcd2e0c7cdc35753d3"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "incremental",
+          "kind": "technique",
+          "mode": "creator_advice",
+          "summary": "Add sweetener in small increments and taste after each addition before deciding on more.",
+          "stage": "backsweetening",
+          "topics": [
+            "backsweetening",
+            "sweetening"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                583,
+                588
+              ],
+              "start_ms": 1092720,
+              "passage": ">> What we do is we in small amounts increasingly add to our pre-bwed uh fermentation >> a",
+              "source_sha256": "d5aea0ba27146eb5ed697bcd8b121b42cf27e9f55f5160fcd2e0c7cdc35753d3"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "never_chemicals",
+          "kind": "explanation",
+          "mode": "creator_statement",
+          "summary": "At this February 2026 discussion they say they have not used chemical stabilizers and cannot instruct on them.",
+          "stage": "stabilization",
+          "topics": [
+            "stabilizers",
+            "chemical",
+            "history"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                635,
+                658
+              ],
+              "start_ms": 1208720,
+              "passage": "the Beyond the Bruise and on the main channel. We can link all those. Pasteurization is super simple",
+              "source_sha256": "d5aea0ba27146eb5ed697bcd8b121b42cf27e9f55f5160fcd2e0c7cdc35753d3"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Check surrounding context; this is a dated statement about their experience."
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "zWBU3EI-EFo",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "zWBU3EI-EFo",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "xHbo1LnZnXw",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "xHbo1LnZnXw",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "DRpWBom5yp8",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "DRpWBom5yp8",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "d5aea0ba27146eb5ed697bcd8b121b42cf27e9f55f5160fcd2e0c7cdc35753d3",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 753
+      }
+    },
+    {
+      "id": "TM83WJvfKBA",
+      "title": "Sweetening, Adjusting Flavors, Non Fermentable Sugars, Mead, Wine, Cider and Beer",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=TM83WJvfKBA",
+      "published_at": "2024-08-16T06:00:34-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "ph",
+          "kind": "troubleshooting",
+          "mode": "ai_interpretation",
+          "summary": "The hosts suspect pH contributed to a stall. An addition transcribed as “yeast holes” reportedly helped; interpreting that as yeast hulls needs audio confirmation.",
+          "stage": "fermentation",
+          "topics": [
+            "fermentation",
+            "stalled",
+            "pH",
+            "yeast hulls"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                40,
+                73
+              ],
+              "start_ms": 98360,
+              "passage": "fermented that it stalled right and that's interesting because of what came next right and stalls are an",
+              "source_sha256": "9ed7bc8024f47d24d12270b7ae54c623419f8fb8c1d638ae72123d242aebb022"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Cause not established; no measured pH supplied.",
+            "Uncertain ASR term: yeast holes; likely hulls, not verified."
+          ]
+        },
+        {
+          "id": "coefficient",
+          "kind": "explanation",
+          "mode": "creator_statement",
+          "summary": "The automatic caption gives 135 as an ABV calculation coefficient.",
+          "stage": "after_fermentation",
+          "topics": [
+            "abv",
+            "calculation",
+            "coefficient"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                409,
+                418
+              ],
+              "start_ms": 969839,
+              "passage": "concise and makes sense you have your starting gravity and your ending gravity you use those to calculate",
+              "source_sha256": "9ed7bc8024f47d24d12270b7ae54c623419f8fb8c1d638ae72123d242aebb022"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Possible transcription error: verify audio before treating 135 as the intended number."
+          ]
+        },
+        {
+          "id": "abv_inputs",
+          "kind": "technique",
+          "mode": "creator_advice",
+          "summary": "Use readings from fermentation for the ABV calculation, keeping sweetening readings separate; additions can dilute the result.",
+          "stage": "backsweetening",
+          "topics": [
+            "backsweetening",
+            "gravity",
+            "abv"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                396,
+                425
+              ],
+              "start_ms": 935720,
+              "passage": "confused and I'm going to clarify that because I know you have your but um so you figure",
+              "source_sha256": "9ed7bc8024f47d24d12270b7ae54c623419f8fb8c1d638ae72123d242aebb022"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "to_taste",
+          "kind": "technique",
+          "mode": "creator_advice",
+          "summary": "Sweeten to your own taste; viewers need not match the hosts’ preferred sweetness.",
+          "stage": "backsweetening",
+          "topics": [
+            "backsweetening",
+            "preference"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                780,
+                806
+              ],
+              "start_ms": 1828519,
+              "passage": "even the back sweetening the way we back sweeten allows you to bring it to the sweetness level",
+              "source_sha256": "9ed7bc8024f47d24d12270b7ae54c623419f8fb8c1d638ae72123d242aebb022"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "o5fW0nhxUWw",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "o5fW0nhxUWw",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "sOsSNPrNECg",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "sOsSNPrNECg",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "ombMMecpz6s",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "ombMMecpz6s",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "EzaMkTp5B_0",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "EzaMkTp5B_0",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "SP2gdkwFano",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "SP2gdkwFano",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "3M5Up696Ivc",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "3M5Up696Ivc",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "zWBU3EI-EFo",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "zWBU3EI-EFo",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "9ed7bc8024f47d24d12270b7ae54c623419f8fb8c1d638ae72123d242aebb022",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 873
+      }
+    },
+    {
+      "id": "qupXap5BBOE",
+      "title": "STABILIZERS in MEAD Making at Home: Mistake?",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=qupXap5BBOE",
+      "published_at": "2026-08-02T06:00:27-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "honey",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 lbs honey",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 lbs honey",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 lbs honey",
+              "start_ms": null,
+              "source_sha256": "56128fa999e2e936d38b6a472745dda79ef63718b18592657c64096f19f765e7"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "water",
+          "kind": "batch_size",
+          "mode": "batch_result",
+          "summary": "Water (to 1 gallon)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "batch_size"
+          ],
+          "measurement": {
+            "original": "Water (to 1 gallon)",
+            "role": "batch_size",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Water (to 1 gallon)",
+              "start_ms": null,
+              "source_sha256": "56128fa999e2e936d38b6a472745dda79ef63718b18592657c64096f19f765e7"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "Premier Classique wine yeast",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "Premier Classique wine yeast",
+            "role": "yeast",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Premier Classique wine yeast",
+              "start_ms": null,
+              "source_sha256": "56128fa999e2e936d38b6a472745dda79ef63718b18592657c64096f19f765e7"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "instrument",
+          "kind": "equipment",
+          "mode": "creator_advice",
+          "summary": "Use a regular hydrometer for official gravity checks; they use the Tilt as a guide.",
+          "stage": "fermentation",
+          "topics": [
+            "hydrometer",
+            "equipment",
+            "gravity"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                168,
+                177
+              ],
+              "start_ms": 333440,
+              "passage": "when this might be ready for the next stage. >> Our official gravity readings will be done by",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "og",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "They read the base mead at 1.070 before fermentation.",
+          "stage": "primary",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                148,
+                154
+              ],
+              "start_ms": 298000,
+              "passage": ">> Okay. >> All right, now you can remove the spattle. 1.070. And because everything was sanitized, I",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.070",
+            "role": "original_gravity",
+            "value": 1.07
+          }
+        },
+        {
+          "id": "fg",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "A hydrometer check is reported as 0.998 before splitting and sweetening the batch.",
+          "stage": "after_fermentation",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                268,
+                278
+              ],
+              "start_ms": 512640,
+              "passage": ">> I'm just basically making sure that it's at a stable number because we are going to be",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "0.998",
+            "role": "fermentation_final_gravity",
+            "value": 0.998
+          }
+        },
+        {
+          "id": "sweet",
+          "kind": "gravity",
+          "mode": "ai_interpretation",
+          "summary": "The hosts describe 1.012–1.014 as a planned sweetness after adding honey, not a measured fermentation final gravity.",
+          "stage": "backsweetening",
+          "topics": [
+            "backsweetening",
+            "gravity"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                389,
+                399
+              ],
+              "start_ms": 747880,
+              "passage": "We're just going to add 2 oz cuz I actually figured out that's about like a 1.012 to",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.012 to 1.014 final gravity",
+            "role": "post_backsweetening_target"
+          }
+        },
+        {
+          "id": "taste",
+          "kind": "tasting",
+          "mode": "batch_result",
+          "summary": "In this batch the hosts preferred pasteurized over chemically stabilized samples; they explicitly limit the result to this recipe.",
+          "stage": "tasting",
+          "topics": [
+            "stabilizers",
+            "pasteurization",
+            "tasting",
+            "preference"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                988,
+                1032
+              ],
+              "start_ms": 1886800,
+              "passage": ">> However, according to this test, like if I had to put numbers on this, the this is",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Subjective batch result; does not establish a universal effect."
+          ]
+        },
+        {
+          "id": "tried_chemicals",
+          "kind": "explanation",
+          "mode": "batch_result",
+          "summary": "By August 2026 they had tried sorbate and metabisulfite; Brian says he had wanted their convenience.",
+          "stage": "stabilization",
+          "topics": [
+            "stabilizers",
+            "chemical",
+            "history"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                973,
+                987
+              ],
+              "start_ms": 1856400,
+              "passage": ">> that because okay, I'm just going to be totally honest with you guys. For years, I have",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "calculated_abv",
+          "kind": "abv",
+          "mode": "ai_calculation",
+          "summary": "Calculated pre-sweetening ABV estimate: 9.45%, using 1.070 and 0.998; later dilution is not included.",
+          "stage": "after_fermentation",
+          "topics": [
+            "abv",
+            "calculation"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                268,
+                278
+              ],
+              "start_ms": 512640,
+              "passage": ">> I'm just basically making sure that it's at a stable number because we are going to be",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            },
+            {
+              "source": "transcript",
+              "segments": [
+                148,
+                154
+              ],
+              "start_ms": 298000,
+              "passage": ">> Okay. >> All right, now you can remove the spattle. 1.070. And because everything was sanitized, I",
+              "source_sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "calculation": {
+            "formula": "(og - fermentation_fg) * 131.25",
+            "inputs": {
+              "og": {
+                "finding_id": "og",
+                "value": 1.07
+              },
+              "fermentation_fg": {
+                "finding_id": "fg",
+                "value": 0.998
+              }
+            },
+            "result": 9.45,
+            "unit": "% ABV",
+            "limitations": "Approximate formula; no sweetening dilution correction."
+          }
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "Bddy9HFbe4I",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "Bddy9HFbe4I",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "-X00d3C14z0",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "-X00d3C14z0",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "4827d5ab6c41f8639aed4400cece368474aec9964ffabfdff9c87386662f0437",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 1184
+      }
+    },
+    {
+      "id": "AtZE2YKbeUA",
+      "title": "Wild Yeast Fermentation Gone BAD!",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=AtZE2YKbeUA",
+      "published_at": "2026-10-25T06:00:30-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "description_only",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "pending",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [],
+      "relations": [],
+      "import_failure": {
+        "source": "Firecrawl youtube-com/videos/video_transcript",
+        "code": "provider_rate_limited",
+        "retry_after_seconds": 60,
+        "detail": "Default returned Arabic ASR; English attempts rate-limited. No English speech reconstructed.",
+        "review_status": "needs_transcript"
+      }
+    },
+    {
+      "id": "-0mXCpl6KfY",
+      "title": "The Easiest Peach Perry Ever… Until Everything Went Wrong",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=-0mXCpl6KfY",
+      "published_at": "2026-10-18T05:56:09-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "juice",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 US Gallon Pear Juice",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 US Gallon Pear Juice",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 US Gallon Pear Juice",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "1/2 packet Lalvin QA23 Yeast",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "1/2 packet Lalvin QA23 Yeast",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1/2 packet Lalvin QA23 Yeast",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "apricots",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1/2 lb Dried Apricots",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1/2 lb Dried Apricots",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1/2 lb Dried Apricots",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "peaches",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 lb Dried Peaches",
+          "stage": "secondary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 lb Dried Peaches",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 lb Dried Peaches",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "enzyme",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "3/4 teaspoon Pectic Enzyme (we added it before and after Pasteurizing)",
+          "stage": "unspecified",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "3/4 teaspoon Pectic Enzyme (we added it before and after Pasteurizing)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "3/4 teaspoon Pectic Enzyme (we added it before and after Pasteurizing)",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": [
+            "Descriptions give recipe totals; stage is unspecified where timing is ambiguous."
+          ]
+        },
+        {
+          "id": "apple",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "20 oz Apple Juice",
+          "stage": "later_addition",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "20 oz Apple Juice",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "20 oz Apple Juice",
+              "start_ms": null,
+              "source_sha256": "06e13cd737cfb016c2535fcd17224956fdd29e958ad88697df6929861bc383b2"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "stall",
+          "kind": "troubleshooting",
+          "mode": "batch_result",
+          "summary": "At about three weeks they read 1.012 and discuss a possible stall, without establishing a cause.",
+          "stage": "fermentation",
+          "topics": [
+            "fermentation",
+            "stalled",
+            "troubleshooting"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                419,
+                446
+              ],
+              "start_ms": 791480,
+              "passage": "did not finish. >> Huh. >> What did we use? Lalvin QA23 yeast. >> Really? >> It's a",
+              "source_sha256": "a956b171ebf9deb1876fc975b9e3d01504103456636be096c4421e538472e6d1"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Possible stall, not a confirmed cause."
+          ],
+          "measurement": {
+            "original": "1.012",
+            "role": "intermediate_gravity",
+            "value": 1.012
+          }
+        },
+        {
+          "id": "preservative",
+          "kind": "explanation",
+          "mode": "creator_advice",
+          "summary": "They say dried peaches contain sulfur dioxide and might inhibit further fermentation; this is their conjecture in this batch.",
+          "stage": "secondary",
+          "topics": [
+            "fermentation",
+            "sulfites",
+            "preservatives"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                469,
+                476
+              ],
+              "start_ms": 873720,
+              "passage": ">> Um but to make this be a peach perry, we definitely need some peaches. >> Now, these",
+              "source_sha256": "a956b171ebf9deb1876fc975b9e3d01504103456636be096c4421e538472e6d1"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Unsupported causal inference; not a reliable stabilization procedure."
+          ]
+        },
+        {
+          "id": "apple_gravity",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "After adding apple juice the later reading is reported as 1.024; do not use it as fermentation final gravity.",
+          "stage": "later_addition",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                1635,
+                1642
+              ],
+              "start_ms": 2998800,
+              "passage": "There, I said it. >> He told it. >> So, it was at 1.024 after we added all",
+              "source_sha256": "a956b171ebf9deb1876fc975b9e3d01504103456636be096c4421e538472e6d1"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.024",
+            "role": "post_addition_gravity",
+            "value": 1.024
+          }
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "zWBU3EI-EFo",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "zWBU3EI-EFo",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "a956b171ebf9deb1876fc975b9e3d01504103456636be096c4421e538472e6d1",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 2051
+      }
+    },
+    {
+      "id": "vXMZRdNbNvc",
+      "title": "We Made DANDELION WINE! Was It Worth It?",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=vXMZRdNbNvc",
+      "published_at": "2026-11-08T06:00:28-08:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "sugar",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 lb white granulated sugar",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 lb white granulated sugar",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 lb white granulated sugar",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "flowers",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "Approximately 1 quart dandelion flowers, or roughly 1/2 oz freeze-dried dandelions",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "Approximately 1 quart dandelion flowers, or roughly 1/2 oz freeze-dried dandelions",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Approximately 1 quart dandelion flowers, or roughly 1/2 oz freeze-dried dandelions",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "water",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "A little over 1 gallon water, allowing for evaporation during steeping",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "A little over 1 gallon water, allowing for evaporation during steeping",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "A little over 1 gallon water, allowing for evaporation during steeping",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "zest",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 tablespoon dried citrus zest (we used Rangpur lime zest)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 tablespoon dried citrus zest (we used Rangpur lime zest)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 tablespoon dried citrus zest (we used Rangpur lime zest)",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "raisins",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 oz raisins (optional, for flavor, body, and color — NOT yeast nutrients)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 oz raisins (optional, for flavor, body, and color — NOT yeast nutrients)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 oz raisins (optional, for flavor, body, and color — NOT yeast nutrients)",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "1 teaspoon active dry bread yeast (we used Fleischmann's)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "1 teaspoon active dry bread yeast (we used Fleischmann's)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 teaspoon active dry bread yeast (we used Fleischmann's)",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "sweet",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "Additional white sugar for backsweetening, to taste",
+          "stage": "backsweetening",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "Additional white sugar for backsweetening, to taste",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Additional white sugar for backsweetening, to taste",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "batch",
+          "kind": "batch_size",
+          "mode": "batch_result",
+          "summary": "A little over 1 US gallon in primary, with approximately 1 gallon retained after racking.",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "batch_size"
+          ],
+          "measurement": {
+            "original": "A little over 1 US gallon in primary, with approximately 1 gallon retained after racking.",
+            "role": "batch_size",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "A little over 1 US gallon in primary, with approximately 1 gallon retained after racking.",
+              "start_ms": null,
+              "source_sha256": "e4bcffdb75e926ab25da58bdd13d0c38d760dd7fadf6d5c7944938c0c9834fa0"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "fermentation",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "The hosts calculate from an original 1.080 and fermented 0.994; their coefficient is 131.25 and they round the estimated 11.28% to 11%.",
+          "stage": "after_fermentation",
+          "topics": [
+            "gravity",
+            "abv",
+            "coefficient"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                609,
+                614
+              ],
+              "start_ms": 1131080,
+              "passage": "So, we were at 1.080 to start. Uh, 1.080 minus 0.994 is 86 points of gravity, 0.086 *",
+              "source_sha256": "9cae0cfbf5fccbb3dbae4b52404a772ba7c1dcee84807b3f5e3f9d036256b832"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.080 minus 0.994",
+            "role": "fermentation_gravity_pair",
+            "og": 1.08,
+            "fermentation_fg": 0.994
+          }
+        },
+        {
+          "id": "sweet_gravity",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "The later sweetened wine is read at 1.016, separate from fermented 0.994.",
+          "stage": "backsweetening",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                740,
+                747
+              ],
+              "start_ms": 1383800,
+              "passage": "you don't feel like it's watery. Oh, we're a little higher. >> Um I said 1.016. It is",
+              "source_sha256": "9cae0cfbf5fccbb3dbae4b52404a772ba7c1dcee84807b3f5e3f9d036256b832"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.016",
+            "role": "post_backsweetening_gravity",
+            "value": 1.016
+          }
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "q_CTEIXvrxs",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "q_CTEIXvrxs",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "zWBU3EI-EFo",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "zWBU3EI-EFo",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "9cae0cfbf5fccbb3dbae4b52404a772ba7c1dcee84807b3f5e3f9d036256b832",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 1099
+      }
+    },
+    {
+      "id": "SP9adI1mLoA",
+      "title": "MEAD Made From Red Hots Candy!",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=SP9adI1mLoA",
+      "published_at": "2026-11-01T06:00:31-08:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "honey",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "4 lbs honey, total (added in stages)",
+          "stage": "multiple",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "4 lbs honey, total (added in stages)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "4 lbs honey, total (added in stages)",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "water",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "106 fl oz water (initial fermentation)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "106 fl oz water (initial fermentation)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "106 fl oz water (initial fermentation)",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "1 packet Lalvin EC-1118 yeast",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "1 packet Lalvin EC-1118 yeast",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 packet Lalvin EC-1118 yeast",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "candy",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "5 bags Red Hots cinnamon candy (4.5 oz each; 22.5 oz total)",
+          "stage": "after_fermentation",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "5 bags Red Hots cinnamon candy (4.5 oz each; 22.5 oz total)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "5 bags Red Hots cinnamon candy (4.5 oz each; 22.5 oz total)",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "dissolve",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "2 cups water (for dissolving the candy)",
+          "stage": "after_fermentation",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "2 cups water (for dissolving the candy)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "2 cups water (for dissolving the candy)",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "initial",
+          "kind": "stage",
+          "mode": "batch_result",
+          "summary": "Initial: 2 lbs / 907 g",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "stage"
+          ],
+          "measurement": {
+            "original": "Initial: 2 lbs / 907 g",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Initial: 2 lbs / 907 g",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "first",
+          "kind": "stage",
+          "mode": "batch_result",
+          "summary": "First addition: 1 lb / 454 g",
+          "stage": "step_feed",
+          "topics": [
+            "recipe",
+            "stage"
+          ],
+          "measurement": {
+            "original": "First addition: 1 lb / 454 g",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "First addition: 1 lb / 454 g",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "second",
+          "kind": "stage",
+          "mode": "batch_result",
+          "summary": "Second addition: ½ lb / 227 g",
+          "stage": "step_feed",
+          "topics": [
+            "recipe",
+            "stage"
+          ],
+          "measurement": {
+            "original": "Second addition: ½ lb / 227 g",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Second addition: ½ lb / 227 g",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "third",
+          "kind": "stage",
+          "mode": "batch_result",
+          "summary": "Third addition: ½ lb / 227 g",
+          "stage": "step_feed",
+          "topics": [
+            "recipe",
+            "stage"
+          ],
+          "measurement": {
+            "original": "Third addition: ½ lb / 227 g",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "Third addition: ½ lb / 227 g",
+              "start_ms": null,
+              "source_sha256": "c6c7d6ea18c960ae054a1ae19d161d9f5c906e0a1b91ecb1555cadd6b6b2d226"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "og",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "The initial hydrometer reading is 1.070, before later honey feeds.",
+          "stage": "primary",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                222,
+                227
+              ],
+              "start_ms": 442280,
+              "passage": "accurate for that perspective, the way we like to do things. 1.070. What do you know? Okay. So,",
+              "source_sha256": "844a9c63656f82ffd3c7ddabb2424ec0ff80b3edded645f084064ad0d87f8d7f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.070",
+            "role": "original_gravity",
+            "value": 1.07
+          }
+        },
+        {
+          "id": "candy_gravity",
+          "kind": "gravity",
+          "mode": "batch_result",
+          "summary": "After candy addition they report 1.072. That is sweetened gravity, not fermentation final gravity.",
+          "stage": "after_fermentation",
+          "topics": [],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                991,
+                996
+              ],
+              "start_ms": 1952800,
+              "passage": "probably just scrape, scoop, remove it in some fashion. >> All right. This is crazy. 1.072 >> [music]",
+              "source_sha256": "844a9c63656f82ffd3c7ddabb2424ec0ff80b3edded645f084064ad0d87f8d7f"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "1.072",
+            "role": "post_backsweetening_gravity",
+            "value": 1.072
+          }
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "zWBU3EI-EFo",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "zWBU3EI-EFo",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "844a9c63656f82ffd3c7ddabb2424ec0ff80b3edded645f084064ad0d87f8d7f",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 1270
+      }
+    },
+    {
+      "id": "mK0d4ulSvrw",
+      "title": "Caramel Apple Bochet Mead -Start to One Year Tasting! (Bochet Cyser)",
+      "creator": "City Steading Brews",
+      "creator_id": "UCqgnJOZ4ity3nQL_xe_hGYg",
+      "url": "https://www.youtube.com/watch?v=mK0d4ulSvrw",
+      "published_at": "2024-09-13T06:01:01-07:00",
+      "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+      "metadata_source": "YouTube watch-page player JSON",
+      "coverage": "transcript_backed",
+      "extraction_version": "manual-pilot-v1",
+      "review_status": "transcript_checked",
+      "completeness": "partial; not a complete recipe or transcript synopsis",
+      "findings": [
+        {
+          "id": "cooked",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 lb cooked Wildflower Honey",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 lb cooked Wildflower Honey",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 lb cooked Wildflower Honey",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "honey",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 lb Wildflower Honey",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 lb Wildflower Honey",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 lb Wildflower Honey",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "apples",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "12 roasted Fuji Apples",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "12 roasted Fuji Apples",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "12 roasted Fuji Apples",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "clove",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 clove",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 clove",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 clove",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "cinnamon",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1 cinnamon stick",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1 cinnamon stick",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 cinnamon stick",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "allspice",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "3 All Spice Berries",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "3 All Spice Berries",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "3 All Spice Berries",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "juice",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1/2 gallon Apple Juice",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1/2 gallon Apple Juice",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1/2 gallon Apple Juice",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "yeast",
+          "kind": "yeast",
+          "mode": "batch_result",
+          "summary": "1 Full Pack of Lalvin 71B",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "yeast"
+          ],
+          "measurement": {
+            "original": "1 Full Pack of Lalvin 71B",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1 Full Pack of Lalvin 71B",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "hulls",
+          "kind": "ingredient",
+          "mode": "batch_result",
+          "summary": "1/4 teaspoon Yeast Hulls (optional)",
+          "stage": "primary",
+          "topics": [
+            "recipe",
+            "ingredient"
+          ],
+          "measurement": {
+            "original": "1/4 teaspoon Yeast Hulls (optional)",
+            "role": "ingredient",
+            "normalized": null
+          },
+          "evidence": [
+            {
+              "source": "description",
+              "passage": "1/4 teaspoon Yeast Hulls (optional)",
+              "start_ms": null,
+              "source_sha256": "c10a3038fb0612bd3833ba09c039cf101a92602de44fefbe95aba92460133a97"
+            }
+          ],
+          "review_status": "source_checked",
+          "reviewed_by": "Codex manual comparison with current creator description",
+          "flags": []
+        },
+        {
+          "id": "extra_honey",
+          "kind": "stage",
+          "mode": "batch_result",
+          "summary": "During the evolving brew they add a further pound of honey for sweetness; fermentation subsequently continues, so the initial ingredient list is not the total honey used.",
+          "stage": "step_feed",
+          "topics": [
+            "backsweetening",
+            "recipe",
+            "step feeding"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                677,
+                691
+              ],
+              "start_ms": 1589919,
+              "passage": "means it might even have some more room to go I don't really want to give this a",
+              "source_sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481"
+            },
+            {
+              "source": "transcript",
+              "segments": [
+                1156,
+                1181
+              ],
+              "start_ms": 2718280,
+              "passage": "last we did some so we've added some honey we back sweetened it and it dropped a little bit",
+              "source_sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [],
+          "measurement": {
+            "original": "a pound",
+            "role": "additional_honey",
+            "value": 1,
+            "unit": "lb"
+          }
+        },
+        {
+          "id": "ambiguous_og",
+          "kind": "gravity",
+          "mode": "ai_interpretation",
+          "summary": "The captions render the starting gravity as “1.18”; missing digits make it unsuitable as a numerical calculation input.",
+          "stage": "primary",
+          "topics": [
+            "gravity"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                388,
+                395
+              ],
+              "start_ms": 905279,
+              "passage": "1.18 reading right now I'm actually pretty okay with that we could add more honey but this is",
+              "source_sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": [
+            "Uncertain numeric transcription; audiovisual check needed. No normalized gravity assigned."
+          ],
+          "measurement": {
+            "original": "1.18",
+            "role": "ambiguous_original_gravity"
+          }
+        },
+        {
+          "id": "early_taste",
+          "kind": "tasting",
+          "mode": "batch_result",
+          "summary": "Before extended aging, they describe the spice as dominant and apple as hard to detect.",
+          "stage": "conditioning",
+          "topics": [
+            "aging",
+            "tasting",
+            "bochet"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                821,
+                831
+              ],
+              "start_ms": 1927399,
+              "passage": "it now last time we tasted this it was dry beyond belief and just all spice oo this",
+              "source_sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        },
+        {
+          "id": "year_taste",
+          "kind": "tasting",
+          "mode": "batch_result",
+          "summary": "At the included one-year tasting they praise caramel, apple and honey aroma.",
+          "stage": "one_year_tasting",
+          "topics": [
+            "aging",
+            "tasting",
+            "bochet"
+          ],
+          "evidence": [
+            {
+              "source": "transcript",
+              "segments": [
+                1403,
+                1423
+              ],
+              "start_ms": 3314559,
+              "passage": "smelled it while you were talking and I didn't even swirl it and I was just like oh",
+              "source_sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481"
+            }
+          ],
+          "review_status": "transcript_checked",
+          "reviewed_by": "Codex manual comparison with retrieved English captions",
+          "flags": []
+        }
+      ],
+      "relations": [
+        {
+          "target_video_id": "Zx0OvO0U0RE",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "Zx0OvO0U0RE",
+            "start_ms": null
+          }
+        },
+        {
+          "target_video_id": "OiXEedYvn_w",
+          "type": "creator_link",
+          "evidence": {
+            "source": "description",
+            "passage": "OiXEedYvn_w",
+            "start_ms": null
+          }
+        }
+      ],
+      "transcript_provenance": {
+        "source": "youtube_captions",
+        "provider": "Firecrawl youtube-com/videos/video_transcript",
+        "language": "en",
+        "kind": "asr",
+        "sha256": "6a3712d65a0497aa9c4dbb04d3e7f466d6c0d880611a36d4c9dafc35f26f9481",
+        "retrieved_at": "2026-11-12T01:04:38.520607+00:00",
+        "segment_count": 1801
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "coefficient",
+      "videos": [
+        "TM83WJvfKBA",
+        "vXMZRdNbNvc"
+      ],
+      "findings": [
+        "coefficient",
+        "fermentation"
+      ],
+      "status": "possible_transcription_conflict",
+      "summary": "The captions differ on an ABV coefficient (135 versus 131.25). This is a candidate transcription conflict requiring audio review, not a confirmed disagreement in brewing advice."
+    },
+    {
+      "id": "experience_changed",
+      "videos": [
+        "wkMfTcUg4IY",
+        "qupXap5BBOE"
+      ],
+      "findings": [
+        "never_chemicals",
+        "tried_chemicals"
+      ],
+      "status": "chronological_change",
+      "summary": "Their February 2026 statement that they had not used chemical stabilizers predates the August 2026 experiment. Preserve both as a change in experience, not simultaneous contradictory advice."
+    }
+  ],
+  "followup_comparison": {
+    "videos": [
+      "geBml1e3zFY",
+      "EFPxb3n2Wuc"
+    ],
+    "summary": "The creator links the avocado follow-up to the original recipe. The original uses avocado honey, water and 71B; the follow-up reports stable fermented gravity, then adds spices and later sweetens. The follow-up’s tasting notes concern that changed batch, not an unchanged replication.",
+    "findings": [
+      [
+        "geBml1e3zFY",
+        "honey"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "fg"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "taste_before"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "clove"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "cardamom"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "allspice"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "taste_after"
+      ],
+      [
+        "EFPxb3n2Wuc",
+        "sweet_gravity"
+      ]
+    ]
+  }
+}
