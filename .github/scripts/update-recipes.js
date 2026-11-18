@@ -384,8 +384,13 @@ async function main() {
 
   // Every feed video that is neither on the page nor marked seen is checked,
   // whatever its date, so a video missed once is not locked out by a newer card.
+  // A card already in index.html is never rebuilt. That includes the hand-filled
+  // transcript cards (data-src="transcript"): those amounts are not in the
+  // YouTube description, so generating a card from the description would wipe
+  // them or add a duplicate.
+  const onPage = id => html.includes(`id="v-${id}"`);
   const todo = feed
-    .filter(v => v.id && !seen.includes(v.id) && !html.includes(`id="v-${v.id}"`))
+    .filter(v => v.id && !seen.includes(v.id) && !onPage(v.id))
     .sort((a, b) => a.published.localeCompare(b.published));
   if (!todo.length) { console.log('No new videos.'); return; }
 
@@ -401,6 +406,14 @@ async function main() {
     const { recipe, via } = await findRecipe(v.title, desc);
 
     if (recipe) {
+      // Second lock, in case a card was added by hand after the feed was read.
+      // Transcript cards must stay as written in index.html.
+      if (onPage(v.id)) {
+        if (!seen.includes(v.id)) seen.push(v.id);
+        flagged = flagged.filter(f => f.id !== v.id);
+        console.log(`  Already on the page; left the existing card alone: ${v.title}`);
+        continue;
+      }
       html = insertCard(html, recipe.category, buildCard(v, recipe));
       seen.push(v.id);
       flagged = flagged.filter(f => f.id !== v.id);
